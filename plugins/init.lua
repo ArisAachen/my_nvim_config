@@ -2,7 +2,10 @@ local overrides = require "custom.plugins.overrides"
 
 return {
 
-  ["goolord/alpha-nvim"] = { disable = false }, -- enables dashboard
+  ["goolord/alpha-nvim"] = {
+    disable = false,
+    override_options = overrides.alpha,
+  }, -- enables dashboard
 
   -- Override plugin definition options
   ["neovim/nvim-lspconfig"] = {
@@ -41,7 +44,22 @@ return {
     end,
   },
 
-  ["sakhnik/nvim-gdb"] = {},
+  ["mfussenegger/nvim-dap"] = {
+    config = function()
+      require "custom.plugins.nvimdap"
+    end,
+    -- override_options = overrides.dap,
+  },
+
+  ["rcarriga/nvim-dap-ui"] = {
+    override_options = overrides.dapui,
+  },
+
+  ["theHamsta/nvim-dap-virtual-text"] = {
+    overrides = overrides.nvim_dap_virtual_text
+  }
+
+  -- ["sakhnik/nvim-gdb"] = {},
   -- remove plugin
   -- ["hrsh7th/cmp-path"] = false,
 }
